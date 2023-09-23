@@ -25,9 +25,8 @@ nodes:
     temperature: 0.7
     chat_history: ${inputs.chat_history}
     question: ${inputs.question}
-    model: gpt-3.5-turbo
     system_answer: ${math_planner.output}
-  connection: AzureOpenAIConn
+  connection: AzureOpenAIConnMac
   api: chat
 - name: math_planner
   type: python
@@ -35,6 +34,6 @@ nodes:
     type: code
     path: math_planner.py
   inputs:
-    connection: AzureOpenAIConn
+    connection: AzureOpenAIConnMac
     intent: ${inputs.question}
     deployment_name: gpt-35-turbo

@@ -74,3 +74,19 @@ class Math:
     )
     def divide(self, context: SKContext) -> str:
         return str(float(context["input"]) / float(context["denominator"]))
+    
+    @sk_function(
+        description="Calculate the logarithm of a given number with a specified base.",
+        name="log",
+    )
+    @sk_function_context_parameter(
+        name="input",
+        description="input (float): The number you want to calculate the logarithm for.",
+    )
+    @sk_function_context_parameter(
+        name="input2",
+        description="input2 (float): The base of the logarithm.",
+    )
+    def logarithm(self, context: SKContext) -> str:  
+            # Using the change of base formula
+            return math.log("input") / math.log("input2")

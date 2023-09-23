@@ -1,0 +1,18 @@
+# Create flow
+pf flow init --flow FabsMathTutor --type chat
+
+# Deploy flow
+pf flow serve --source FabsMathTutor --port 8080 --host localhost
+
+# View results
+pf run show-details -n FabsMathTutor-2
+pf run visualize -n FabsMathTutor-2
+
+# Run batch
+pf run create  --flow . --data evaldata.jsonl --stream --name FabsMathTutor-X
+
+# Evaluate batch
+pf run create --flow ../eval-accuracy-maths-to-code --data ./evaldata.jsonl --column-mapping groundtruth='${data.groundtruth}' prediction='${run.outputs.answer}' --run FabsMathTutor-X --stream --name eval-FabsMathTutor-X
+
+# Get metrics
+pf run show-metrics -n eval-FabsMathTutor-X
